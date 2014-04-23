@@ -1,22 +1,29 @@
 function quyenCaroInit () {
   var quyenCr = {};
+  // Global configuration and initialization library helper for canvas
+  // The size of the cells include height and width
   quyenCr.lineXYSize = 23;
+  // Total cells
   quyenCr.totalLine = 27;
+  // The size of the XO
   var xoSize = quyenCr.lineXYSize - 3;
   var RectSize = quyenCr.lineXYSize - 2;
+  // Width of chessboard
   quyenCr.canvasWidth = quyenCr.totalLine * quyenCr.lineXYSize;
+  // Height of chessboard
   quyenCr.canvasHeight = quyenCr.canvasWidth;
-  quyenCr.createObject = function () {
-    quyenCr.stage = new Kinetic.Stage({
-      container: 'container',
-      width: quyenCr.canvasWidth,
-      height: quyenCr.canvasHeight
-    });
-    quyenCr.layer = new Kinetic.Layer();
-  };
+  // Kinetic library
+  quyenCr.stage = new Kinetic.Stage({
+    container: 'container',
+    width: quyenCr.canvasWidth,
+    height: quyenCr.canvasHeight
+  });
+  quyenCr.layer = new Kinetic.Layer();
 
-  quyenCr.createObject();
-
+  /**
+   * Fill Coloring for chessboard
+   * @returns {undefined}
+   */
   quyenCr.FillBackground = function () {
     var rect = new Kinetic.Rect({
       x: 0,
@@ -28,6 +35,14 @@ function quyenCaroInit () {
     quyenCr.layer.add(rect);
   };
 
+  /**
+   * Append the XO chessman into chessboard
+   * 
+   * @param {type} isX
+   * @param {type} x
+   * @param {type} y
+   * @returns {undefined}
+   */
   quyenCr.XOFill = function (isX, x, y) {
     var imageObj = new Image();
     imageObj.src = isX ? 'images/Caro_X.jpg' : 'images/Caro_O.jpg';
@@ -45,6 +60,11 @@ function quyenCaroInit () {
     };
   };
 
+  /**
+   * The small square-shaped box containing the Chessmen
+   * 
+   * @returns {undefined}
+   */
   quyenCr.RectFill = function () {
     var beginY = 0, beginX = 0;
     for (var i = 1; i <= quyenCr.totalLine; i++) {
@@ -73,8 +93,11 @@ function quyenCaroInit () {
     }
   };
 
+  // Fill background
   quyenCr.FillBackground();
+  // Small box
   quyenCr.RectFill();
+  // Show the layer
   quyenCr.stage.add(quyenCr.layer);
 }
 
